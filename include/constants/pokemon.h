@@ -367,4 +367,11 @@ enum EvoSpinDirections {
 #define LEGENDARY_PERFECT_IV_COUNT 0
 #endif
 
+// Types of Move Reminder + other tutors. Set to P_VAR_MOVE_MANAGER
+#define MOVE_REMINDER_NORMAL          0 // Normal behavior; attempts to learn level up moves prior to current level.
+#define MOVE_REMINDER_LEARN_ALL_MOVES 1 // Gen 7 behavior.
+#define MOVE_TUTOR_EGG_MOVES          2 // Move Tutor returns egg moves
+#define MOVE_REMINDER_CHECK_ALL_MOVES 3 // Gen 7 behavior.
+#define MOVE_TUTOR_CHECK_EGG_MOVES    4 // Move Tutor returns egg moves
+
 #endif // GUARD_CONSTANTS_POKEMON_H

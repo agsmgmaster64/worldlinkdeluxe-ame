@@ -65,6 +65,10 @@
 #define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/make_teachables.py using the included JSON files based on available TMs and tutors.
 #define P_TUTOR_MOVES_ARRAY              FALSE  // If TRUE, generates a gTutorMoves array automatically using make_teachables.py. (generally not needed, but the HGSS Pokedex has an optional use for it)
 
+// Move reminder settings
+#define P_USE_FRLG_RELEARNER_MENU       TRUE // If TRUE, the move reminder will use the tweaked FRLG reminder menu instead.
+#define P_VAR_MOVE_MANAGER              0    // If not 0, you can use this var to toggle between using vanilla move reminder behavior, Gen 7 reminder behavior, or being able to teach egg moves.
+
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.

@@ -22,6 +22,9 @@ FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
 
 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
+#if P_VAR_MOVE_MANAGER != 0
+	setvar P_VAR_MOVE_MANAGER, MOVE_REMINDER_NORMAL
+#endif
 	special ChooseMonForMoveRelearner
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale

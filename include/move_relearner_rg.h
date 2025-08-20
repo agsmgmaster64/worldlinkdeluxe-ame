@@ -1,0 +1,6 @@
+#ifndef GUARD_MOVE_RELEARNER_RG_H
+#define GUARD_MOVE_RELEARNER_RG_H
+
+void CB2_InitLearnMove_RG(void);
+
+#endif //GUARD_MOVE_RELEARNER_RG_H

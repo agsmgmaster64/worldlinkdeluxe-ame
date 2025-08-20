@@ -10,6 +10,7 @@
 #include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "move_relearner.h"
+#include "move_relearner_rg.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "menu.h"
@@ -385,7 +386,10 @@ static void Task_WaitForFadeOut(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(CB2_InitLearnMove);
+        if (P_USE_FRLG_RELEARNER_MENU)
+            SetMainCallback2(CB2_InitLearnMove_RG);
+        else
+            SetMainCallback2(CB2_InitLearnMove);
         gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
