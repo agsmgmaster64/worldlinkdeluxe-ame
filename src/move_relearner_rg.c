@@ -177,8 +177,8 @@ static s8 YesNoMenuProcessInput(void);
 static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed, s32 colorIdx);
 
 static const u16 sMoveRelearner_Pal[] = INCBIN_U16("graphics/move_relearner_rg/learn_move.gbapal");
-static const u32 sMoveRelearner_Gfx[] = INCBIN_U32("graphics/move_relearner_rg/learn_move.4bpp.lz");
-static const u32 sMoveRelearner_Tilemap[] = INCBIN_U32("graphics/move_relearner_rg/learn_move.bin.lz");
+static const u32 sMoveRelearner_Gfx[] = INCBIN_U32("graphics/move_relearner_rg/learn_move.4bpp.smol");
+static const u32 sMoveRelearner_Tilemap[] = INCBIN_U32("graphics/move_relearner_rg/learn_move.bin.smolTM");
 
 static const struct BgTemplate sBgTemplates[2] = {
     {
