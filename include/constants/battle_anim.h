@@ -423,7 +423,8 @@
 #define ANIM_TAG_TATSUGIRI_CURLY            (ANIM_SPRITES_START + 409)
 #define ANIM_TAG_TATSUGIRI_DROOPY           (ANIM_SPRITES_START + 410)
 #define ANIM_TAG_TATSUGIRI_STRETCHY         (ANIM_SPRITES_START + 411)
-#define ANIM_TAG_COUNT                      GET_TRUE_SPRITE_INDEX(ANIM_TAG_TATSUGIRI_STRETCHY + 1)
+#define ANIM_TAG_SAFARI_BAIT                (ANIM_SPRITES_START + 412)
+#define ANIM_TAG_COUNT                      GET_TRUE_SPRITE_INDEX(ANIM_TAG_SAFARI_BAIT + 1)
 
 // battlers
 #define ANIM_ATTACKER         0
@@ -596,7 +597,12 @@
 #define B_ANIM_POWER_CONSTRUCT          53
 #define B_ANIM_SWAP_TO_SUBSTITUTE       54
 #define B_ANIM_SWAP_FROM_SUBSTITUTE     55
-#define NUM_B_ANIMS_GENERAL             56
+#define B_ANIM_MON_SCARED               56
+#define B_ANIM_GHOST_GET_OUT            57
+#define B_ANIM_SILPH_SCOPED             58
+#define B_ANIM_ROCK_THROW               59
+#define B_ANIM_SAFARI_REACTION          60
+#define NUM_B_ANIMS_GENERAL             61
 
 // special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -678,6 +684,7 @@ enum SpeciesGfxChange
     SPECIES_GFX_CHANGE_TRANSFORM,
     SPECIES_GFX_CHANGE_FORM_CHANGE,
     SPECIES_GFX_CHANGE_ILLUSION_OFF,
+    SPECIES_GFX_CHANGE_GHOST_UNVEIL,
 };
 
 // Flags given to various functions to indicate which palettes to consider.
