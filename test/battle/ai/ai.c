@@ -1267,7 +1267,12 @@ AI_DOUBLE_BATTLE_TEST("AI can use Acupressure on its ally")
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ACUPRESSURE); }
         OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_SCRATCH); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentRight, MOVE_SCRATCH, target:playerRight); EXPECT_MOVE(opponentLeft, MOVE_ACUPRESSURE, target:opponentRight); }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentRight, MOVE_SCRATCH, target:playerRight);
+            EXPECT_MOVE(opponentLeft, MOVE_ACUPRESSURE, target:opponentRight);
+        }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ACUPRESSURE, opponentLeft);
     }
@@ -1352,6 +1357,156 @@ AI_DOUBLE_BATTLE_TEST("Bolt Beak damage will be correctly seen by AI (doubles)")
             SCORE_EQ_VAL(opponentRight, MOVE_THUNDER,   AI_SCORE_DEFAULT,                    target:playerRight);
             EXPECT_MOVE(opponentLeft,   MOVE_THUNDER,   target:playerRight);
             EXPECT_MOVE(opponentRight,  MOVE_BOLT_BEAK, target:playerRight);
+        }
+    }
+}
+
+AI_MULTI_BATTLE_TEST("AI does not target itself with selected moves in doubles (TARGET_SELECTED)")
+{
+    PASSES_RANDOMLY(100, 100, RNG_AI_SCORE_TIE_DOUBLES_TARGET);
+
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_FLAMETHROWER) == TARGET_SELECTED);
+        AI_FLAGS(0);
+        TIE_BREAK_TARGET(TARGET_TIE_CHOSEN, i % 3);
+        PLAYER(SPECIES_TURTONATOR) { Speed(4); }
+        PARTNER(SPECIES_TURTONATOR) { Speed(2); Moves(MOVE_FLAMETHROWER); }
+        OPPONENT_A(SPECIES_TURTONATOR) { Speed(3); Moves(MOVE_FLAMETHROWER); }
+        OPPONENT_B(SPECIES_TURTONATOR) { Speed(1); Moves(MOVE_FLAMETHROWER); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_FLAMETHROWER);
+            EXPECT_MOVE(playerRight, MOVE_FLAMETHROWER);
+            EXPECT_MOVE(opponentRight, MOVE_FLAMETHROWER);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAMETHROWER, opponentLeft);
+        NOT HP_BAR(opponentLeft);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAMETHROWER, playerRight);
+        NOT HP_BAR(playerRight);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAMETHROWER, opponentRight);
+        NOT HP_BAR(opponentRight);
+    }
+}
+
+AI_MULTI_BATTLE_TEST("AI does not target itself with selected moves in doubles (TARGET_FOES_AND_ALLY)")
+{
+    PASSES_RANDOMLY(100, 100, RNG_AI_SCORE_TIE_DOUBLES_TARGET);
+
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_LAVA_PLUME) == TARGET_FOES_AND_ALLY);
+        AI_FLAGS(0);
+        TIE_BREAK_TARGET(TARGET_TIE_CHOSEN, i % 3);
+        PLAYER(SPECIES_TURTONATOR) { Speed(4); }
+        PARTNER(SPECIES_TURTONATOR) { Speed(2); Moves(MOVE_LAVA_PLUME); }
+        OPPONENT_A(SPECIES_TURTONATOR) { Speed(3); Moves(MOVE_LAVA_PLUME); }
+        OPPONENT_B(SPECIES_TURTONATOR) { Speed(1); Moves(MOVE_LAVA_PLUME); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_LAVA_PLUME);
+            EXPECT_MOVE(playerRight, MOVE_LAVA_PLUME);
+            EXPECT_MOVE(opponentRight, MOVE_LAVA_PLUME);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LAVA_PLUME, opponentLeft);
+        NOT HP_BAR(opponentLeft);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LAVA_PLUME, playerRight);
+        NOT HP_BAR(playerRight);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LAVA_PLUME, opponentRight);
+        NOT HP_BAR(opponentRight);
+    }
+}
+
+AI_MULTI_BATTLE_TEST("AI does not target itself with selected moves in doubles (TARGET_BOTH)")
+{
+    PASSES_RANDOMLY(100, 100, RNG_AI_SCORE_TIE_DOUBLES_TARGET);
+
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_HEAT_WAVE) == TARGET_BOTH);
+        AI_FLAGS(0);
+        TIE_BREAK_TARGET(TARGET_TIE_CHOSEN, i % 3);
+        PLAYER(SPECIES_TURTONATOR) { Speed(4); }
+        PARTNER(SPECIES_TURTONATOR) { Speed(2); Moves(MOVE_HEAT_WAVE); }
+        OPPONENT_A(SPECIES_TURTONATOR) { Speed(3); Moves(MOVE_HEAT_WAVE); }
+        OPPONENT_B(SPECIES_TURTONATOR) { Speed(1); Moves(MOVE_HEAT_WAVE); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_HEAT_WAVE);
+            EXPECT_MOVE(playerRight, MOVE_HEAT_WAVE);
+            EXPECT_MOVE(opponentRight, MOVE_HEAT_WAVE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAT_WAVE, opponentLeft);
+        NOT HP_BAR(opponentLeft);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAT_WAVE, playerRight);
+        NOT HP_BAR(playerRight);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAT_WAVE, opponentRight);
+        NOT HP_BAR(opponentRight);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI does not switch in into invalid Pokemon")
+{
+    u64 flags = 0;
+
+    PARAMETRIZE { flags = (AI_FLAG_ACE_POKEMON | AI_FLAG_SMART_TRAINER); }
+    PARAMETRIZE { flags = AI_FLAG_ACE_POKEMON; }
+
+    GIVEN {
+        AI_FLAGS(flags);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Level(1); }
+        OPPONENT(SPECIES_WYNAUT) { Level(1); }
+        OPPONENT(SPECIES_HAPPINY) { Level(1); }
+        OPPONENT(SPECIES_CHANSEY) { Level(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); }
+        TURN { }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI scores fixed damage moves correctly")
+{
+    enum Move move = MOVE_NONE;
+    s32 hp = 400;
+
+    ASSUME(GetMoveEffect(MOVE_SONIC_BOOM) == EFFECT_FIXED_HP_DAMAGE);
+    ASSUME(GetMoveFixedHPDamage(MOVE_SONIC_BOOM) == 20);
+    ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_HP_DAMAGE);
+    ASSUME(GetMoveFixedHPDamage(MOVE_DRAGON_RAGE) == 40);
+
+    PARAMETRIZE { move = MOVE_SONIC_BOOM, hp = 20; }
+    PARAMETRIZE { move = MOVE_SONIC_BOOM, hp = 60; }
+    PARAMETRIZE { move = MOVE_DRAGON_RAGE, hp = 40; }
+    PARAMETRIZE { move = MOVE_DRAGON_RAGE, hp = 60; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_SMART_TRAINER);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); Moves(MOVE_SCRATCH); MaxHP(hp); HP(hp); Defense(999); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); Moves(MOVE_SCRATCH, move); }
+    } WHEN {
+        if (hp == 60)
+        {
+            TURN { 
+                EXPECT_MOVE(opponent, move);
+                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT);
+                SCORE_EQ_VAL(opponent, move, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE);
+            }
+        }
+        else
+        {
+            TURN { 
+                EXPECT_MOVE(opponent, move);
+                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT);
+                SCORE_EQ_VAL(opponent, move, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL);
+            }
         }
     }
 }
