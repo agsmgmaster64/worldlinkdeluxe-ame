@@ -3405,6 +3405,6 @@ bool8 ScrCmd_bufferregionname(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    StringCopy(sScriptStringVars[stringVarIndex], GetRegionName(regionMap));
+    StringCopy(GetStringVar(stringVarIndex), GetRegionName(regionMap));
     return FALSE;
 }
