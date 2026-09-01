@@ -11,7 +11,7 @@ enum {
     REGIONMAP_TYPE_COUNT
 };
 
-void InitRegionMapWithExitCB(u8 type, void (*callback)(void));
+void InitRegionMapWithExitCB(u8 type, u8 selectedRegion, void (*callback)(void));
 void CB2_OpenFlyMap_Frlg(void);
 
 #endif // GUARD_REGION_MAP_FRLG_H

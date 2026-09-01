@@ -1015,7 +1015,7 @@ static void CB2_FieldShowRegionMap(void)
 void FieldShowRegionMap(void)
 {
     if (IS_FRLG)
-        InitRegionMapWithExitCB(REGIONMAP_TYPE_WALL, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        InitRegionMapWithExitCB(REGIONMAP_TYPE_WALL, GetRegionMapType(gMapHeader.regionMapSectionId), CB2_ReturnToFieldContinueScriptPlayMapMusic);
     else
         SetMainCallback2(CB2_FieldShowRegionMap);
 }
