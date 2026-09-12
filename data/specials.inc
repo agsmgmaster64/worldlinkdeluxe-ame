@@ -79,7 +79,6 @@ gSpecials::
 	def_special ObjectEventInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
 	def_special GetTrainerFlag
@@ -99,7 +98,6 @@ gSpecials::
 	def_special InterviewAfter
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
-	def_special GetNextActiveShowIfMassOutbreak
 	def_special IsTVShowAlreadyInQueue
 	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
@@ -219,7 +217,7 @@ gSpecials::
 	def_special ChooseSendDaycareMon, waitstate=1
 	def_special ShowDaycareLevelMenu, waitstate=1
 	def_special GetNumLevelsGainedFromDaycare
-	def_special GetDaycareCost
+	def_special GetDaycareCostAndPrepareString
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch, waitstate=1
@@ -548,6 +546,7 @@ gSpecials::
 	def_special IsLastMonThatKnowsSurf
 	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
+	def_special PrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
